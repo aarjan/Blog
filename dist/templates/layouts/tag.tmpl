@@ -1,0 +1,25 @@
+{{define "title"}}
+    <title>{{.Data.Name}}</title>
+{{end}}
+
+{{define "content"}}
+    <div class="content-wrapper">
+            <h1>{{.Data.Name}}</h2>
+            {{range .Data.Posts }}
+                {{template "list_post" .}}
+            {{end}}
+    </div>
+{{end}}
+
+{{define "list_post"}}
+    <div class="blog-post">
+        <h2 class="blog-title">{{.Name}}</h1>
+        <h3 class="date">{{.Date}}</h1>
+        <p class="blog-content">
+            {{.Content}}
+        </p>
+        <a href="/api/v1/post/{{.ID}}" class="post-link">Read More...</a>
+    </div>
+{{end}}
+
+

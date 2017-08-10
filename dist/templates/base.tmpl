@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{template "title" .}}
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- FONT AWESOME -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- FONTS AND STYLES 
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Lato+Light" rel="stylesheet"> -->
+        <link rel="stylesheet" href="/api/v1/website/css/main.css" type="text/css">
+        <!-- JQUERY -->
+        <script src="/api/v1/website/js/jquery-3.2.0.min.js"></script>
+        <!-- BOOTSTRAP-->
+        <link rel="stylesheet" href="/api/v1/website/css/bootstrap.min.css">
+        <script src="/api/v1/website/js/bootstrap.min.js"></script>
+        
+    </head>
+    <body>
+        <div class="container">
+            <div class="navbar-wrapper">
+                <nav class="navbar navbar-inverse">
+                    <a class="navbar-brand" href="#">My Blog</a>
+                </nav>
+            </div>
+
+            <div class="alert"  id="api-message" >{{.Message}}</div>
+            
+            {{template "sidebar" .}}
+            {{template "content" .}}
+        </div>
+        
+        {{if .Message}}
+            {{if .Status}}
+                <script>
+                $(document).ready(function(){
+                    $('#api-message').addClass('alert-success');
+                    $('#api-message').show().fadeTo(2000,0,function(){
+                        $(this).css("visibility","hidden");
+                    });
+                });
+                </script>
+            {{else}}
+                <script>
+                $(document).ready(function(){
+                    $('#api-message').addClass('alert-danger');
+                    $('#api-message').show().fadeTo(2000,0,function(){
+                        $(this).css("visibility","hidden");
+                    });
+                });
+                </script>
+            {{end}}
+        {{end}}
+    <footer>
+        <div class="container">
+            <p class="credits">Aarjan Baskota
+                    •     2017    •       Golang
+              </p>
+        </div>
+        {{template "scripts" .}}
+    </footer>
+    </body>
+    
+
+    <!-- Incase, if we don't want the templates, here we define the redundant ones-->
+    {{define "scripts"}}{{end}}
+    {{define "sidebar"}}{{end}}
+</html>

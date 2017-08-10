@@ -1,0 +1,16 @@
+{{define "title"}}
+    <title>Categories</title>
+{{end}}
+
+{{define "content"}}
+<div class="content-wrapper">
+        {{range .}}
+            {{template "list_categories" .}}
+        {{end}}
+</div>
+
+{{end}}
+
+{{define "list_categories"}}
+    <li><a href="/api/v1/category/{{.ID}}" class="category">{{.Name}}</a></li>
+{{end}}

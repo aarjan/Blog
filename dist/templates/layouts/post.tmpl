@@ -1,0 +1,35 @@
+]0={{define "title"}}
+    <title>Post</title>
+{{end}}
+
+{{define "content"}}
+<div class="content-wrapper">
+        <div class="blog-post">
+        <h1 class="post-title">{{.Data.Name}}</h1>
+        <h2 class="date">{{.Data.Date}}</h2>
+        <div class="featured_image">
+            <img src="/api/v1/website/img/1.jpg" alt="featured-image">
+        </div>
+        
+        <div class="post-content">{{.Data.Content}}</div>
+        <hr>
+        <div class="tags_cats">
+            <div class="post-tags">
+            <h2 class="tag-title">Tags</h2>
+                {{range .Data.Tags}}
+                    {{template "list_tags" .}}
+                {{end}}
+            </div>
+            <div class="post-category">
+                <h2 class="cat-title">Category</h2>
+                <a href="/api/v1/category/{{.Data.Cat.ID}}" class="category">{{.Data.Cat.Name}}</a>
+            </div>
+        </div>
+        </div>
+</div>
+
+{{end}}
+
+{{define "list_tags"}}
+<a href="/api/v1/tag/{{.ID}}" class="tag"><i class="fa fa-tag"> {{.Name}}</i></a>
+{{end}}

@@ -1,0 +1,52 @@
+{{define "title"}}
+    <title>Dashboard</title>
+{{end}}
+
+{{define "content"}}
+<div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-8">
+
+                {{range .Data.Posts }}
+                    {{template "list_post" .}}
+                {{end}}
+            </div>
+            <div class="col-md-4">
+                <div class="tag-section">
+                    <h1 class="tag-title">Tags</h1>
+                        {{range .Data.Tags}}
+                            {{template "list_tags" .}}
+                        {{end}}
+                </div>
+                <div class="category-section">
+                    <h1 class="category-title">Categories</h1>
+                        {{range .Data.Categories}}
+                            {{template "list_categories" .}}
+                        {{end}}
+                    
+                </div>
+            </div>
+        </div>
+</div>
+{{end}}
+
+
+{{define "list_post"}}
+    <div class="blog-post">
+        <h1 class="blog-title">{{.Name}}</h1>
+        <h2 class="date">{{.Date}}</h1>
+        <p class="blog-content">
+            {{.Content}}
+        </p>
+        <a href="post/{{.ID}}" class="post-link">Read More...</a>
+    </div>
+
+{{end}}
+
+{{define "list_tags"}}
+    <a href="tag/{{.ID}}" class="tag"><i class="fa fa-tag"> {{.Name}}</i></a>
+{{end}}
+
+{{define "list_categories"}}
+    <li><a href="category/{{.ID}}" class="category">{{.Name}}</a></li>
+{{end}}

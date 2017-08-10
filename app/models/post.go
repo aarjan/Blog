@@ -7,35 +7,28 @@ import (
 type Post struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
+	Date       string `json:"date"`
 	Content    string `json:"content"`
 	CategoryID int    `json:"category_id,omitempty"`
 
 	// Extra
 	Tags []Tag     `json:"tags,omitempty"`
 	Cat  *Category `json:"category,omitempty"`
-	// _exists, _deleted bool
 }
 
 func (p *Post) CreatePost(db *sql.DB) error {
 	var err error
 
-	// if p._exists {
-	// 	return errors.New("Insert failed; Already exists")
-	// }
-
 	const sqlQuery = `INSERT INTO public.posts (` +
-		`name,content,category_id` +
+		`name,date,content,category_id` +
 		`)VALUES(` +
 		`$1,$2,$3 ` +
 		`) RETURNING id`
 
-	err = db.QueryRow(sqlQuery, p.Name, p.Content, p.CategoryID).Scan(&p.ID)
+	err = db.QueryRow(sqlQuery, p.Name, p.Date, p.Content, p.CategoryID).Scan(&p.ID)
 	if err != nil {
 		return err
 	}
-
-	// set existence
-	// p._exists = true
 	return nil
 }
 
@@ -59,8 +52,8 @@ func (p *Post) Delete(db *sql.DB) error {
 	return err
 }
 func (p *Post) GetPost(db *sql.DB) error {
-	const sqlQuery = `SELECT id,name,content,category_id FROM public.posts WHERE id=$1;`
-	err := db.QueryRow(sqlQuery, p.ID).Scan(&p.ID, &p.Name, &p.Content, &p.CategoryID)
+	const sqlQuery = `SELECT id,date,name,content,category_id FROM public.posts WHERE id=$1;`
+	err := db.QueryRow(sqlQuery, p.ID).Scan(&p.ID, &p.Date, &p.Name, &p.Content, &p.CategoryID)
 	if err != nil {
 		return err
 	}
@@ -93,7 +86,7 @@ func (p *Post) GetPost(db *sql.DB) error {
 }
 
 func GetPosts(db *sql.DB) ([]Post, error) {
-	const sqlQuery = `SELECT id,name,content FROM posts;`
+	const sqlQuery = `SELECT id,name,date,content FROM posts;`
 	query, err := db.Query(sqlQuery)
 	defer query.Close()
 	if err != nil {
@@ -102,7 +95,7 @@ func GetPosts(db *sql.DB) ([]Post, error) {
 	var posts []Post
 	p := Post{}
 	for query.Next() {
-		query.Scan(&p.ID, &p.Name, &p.Content)
+		query.Scan(&p.ID, &p.Name, &p.Date, &p.Content)
 		posts = append(posts, p)
 	}
 	return posts, nil

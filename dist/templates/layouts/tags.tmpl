@@ -1,0 +1,16 @@
+{{define "title"}}
+    <title>Tags</title>
+{{end}}
+
+{{define "content"}}
+<div class="content-wrapper">
+        {{range .}}
+            {{template "list_tags" .}}
+        {{end}}
+</div>
+
+{{end}}
+
+{{define "list_tags"}}
+    <li><a href="tag/{{.ID}}" class="tag"><i class="fa fa-tag"> {{.Name}}</i></a></li>
+{{end}}

@@ -1,0 +1,20 @@
+{{define "title"}}
+    <title>Register</title>
+{{end}}
+
+{{define "content"}}
+    <div class="wrapper">
+    <h1 class="heading">Register to Blog!</h1>
+    <div class="register-form">
+    <form action="/api/v1/register" method="post">
+      <input type="text" class="form-control"id="u_name" name="username" placeholder="Username"/>
+      <input class="form-control" type="password" name="password" placeholder="Password"/>
+      <input class="form-control" type="password" name="password_again" placeholder="Password Again"/>
+      <button class="btn btn-primary btn-block" type="submit">REGISTER</button>
+    </form>
+      </div>
+    <div class="login">
+      Have an account? <a href="/api/v1/" id="login-ac">Login</a>
+    </div>
+  </div>
+{{end}}

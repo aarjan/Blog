@@ -1,0 +1,22 @@
+{{define "title"}}
+    <title>Login</title>
+{{end}}
+
+{{define "content"}}
+      
+    <div class="wrapper">
+      <h1 class="heading">Login to Blog!</h1>
+      <div class="login-form">
+      <form action="login" method="post">
+        <input type="text" class="form-control"id="u_name" name="username" placeholder="Username"/>
+        <input class="form-control"id="p_word"type="password" name="password" placeholder="Password"/>
+        <button class="btn-login btn btn-primary btn-block" type="submit">LOGIN</button>
+      </form>
+        </div>
+      <div class="register">
+        Not registered? <a href="register" id="create-ac">Create an account</a>
+      </div>
+    </div>
+
+
+{{end}}

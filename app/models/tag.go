@@ -18,11 +18,10 @@ func (t *Tag) GetTag(db *sql.DB) error {
 	}
 
 	// Get all the posts
-	const postQuery = `select posts.*,categories.* ` +
+	const postQuery = `select posts.id,posts.name,posts.date,posts.content ` +
 		`FROM tags ` +
 		`inner join tags_posts on tags.id=tags_posts.tag_id ` +
 		`inner join posts  on tags_posts.post_id=posts.id ` +
-		`inner join categories on categories.id=posts.category_id ` +
 		`where tags.id=$1;`
 	query, err := db.Query(postQuery, t.ID)
 	defer query.Close()
@@ -30,10 +29,8 @@ func (t *Tag) GetTag(db *sql.DB) error {
 		return err
 	}
 	p := Post{}
-	c := &Category{}
 	for query.Next() {
-		query.Scan(&p.ID, &p.Name, &p.Content, &p.CategoryID, &c.ID, &c.Name)
-		p.Cat = c
+		query.Scan(&p.ID, &p.Name, &p.Date, &p.Content)
 		t.Posts = append(t.Posts, p)
 	}
 	return nil
