@@ -1,0 +1,9 @@
+package: github.com/aarjan/blog
+import:
+- package: github.com/Sirupsen/logrus
+- package: github.com/gorilla/mux
+- package: github.com/gorilla/securecookie
+- package: github.com/lib/pq
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt

@@ -1,17 +1,1 @@
-assets
-main
 checking.go
-*.jpg
-*.json
-generated/
-calendar
-documents/
-trash.sql
-pddb/pddb
-deploy
-db-setup/seed-data/inprogdata
-db-setup/firm-setup/nycds/
-temp-data/
-pddb/conf.json
-.idea
-testdata_reports_redesign

@@ -41,7 +41,6 @@ func AuthMiddleware(h http.Handler) http.Handler {
 
 		// Redirect unauthorized personnel
 		if shared.GetCookie(r).AccessToken == nil {
-
 			log.Warn("Auth Handler Redirecting!!")
 			data := shared.Meta{false, 401, "Unathorized Personnel", nil}
 			shared.SetCookie(w, data, 1000)
